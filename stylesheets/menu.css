@@ -1,0 +1,22 @@
+.navbar-default {
+  background-color: #bf3f79;
+  border-color: #c07d8c;
+  border-radius: 2px;
+}
+.navbar-default .navbar-brand {
+  color: #fdffff;
+}
+.navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
+  color: #ecdbff;
+}
+.navbar-default .navbar-text {
+  color: #fdffff;
+  font-family:    Garamond;
+  font-size:      1.5em;
+}
+.navbar-default .navbar-nav > li > a {
+  color: #fdffff;
+}
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+  color: #ecdbff;
+}

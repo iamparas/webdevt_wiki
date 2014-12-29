@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class="row">
+		<div id="loginform" class="col-md-6">
+			<h4> Signup </h4>
+			<form method="POST">
+				<input type="text" class="form-control" placeholder="Username"/>
+				<input type="email" class="form-control" placeholder="Email"/>
+				<input type="password" class="form-control" placeholder="Password"/>
+				<input type="password" class="form-control" placeholder="Confirm Password"/>
+
+				<button type="submit" class="btn btn-primary"> SignUp </button>
+				<button type="button" class="btn btn-success"> Clear </button>
+			</form>
+		</div>
+	</div>
+
+{% endblock %}

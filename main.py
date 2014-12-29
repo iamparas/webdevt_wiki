@@ -102,41 +102,42 @@ class Login(Handler):
            user=self.user.username
         self.render("login.html",userperson=user)
     def post(self):
-        error="The Username you provided already exist"
-        chk=self.request.get('process')
-        if chk=="signup":
-            username=self.request.get("username")
-            password=self.request.get("password")
-            repass=self.request.get('repassword')
-            email=self.request.get("email")
-            if password !=repass:
-                self.render('index.html',pass_message="Password do not match")
-            else:#
-                p=db.user_acc.by_name(username)
-                if p:
-                    self.render("index.html",message=error)
-                else: #
-                    p=db.user_acc.register(username=username,password=password,email=email)
-                    p.put()
-                    self.set_secure_cookie('user_id',str(p.key().id()))
-                    self.redirect('/start')
-        elif chk=='signin':
-            username=self.request.get("uname")
-            password=self.request.get("pass")
-            u=db.user_acc.login(username,password)#
-            if u:
-                self.login(u)
-                self.redirect('/start')
-            else:
-                msg="Invalid Login Info"
-                self.redirect('/')
+        username=self.request.get("uname")
+        password=self.request.get("pass")
+        u=db.user_acc.login(username,password)#
+        if u:
+            self.login(u)
+            self.redirect('/start')
+        else:
+            msg="Invalid Login Info"
+            self.redirect('/')
 
 class Logout(Handler):#handles user logout 
     def get(self):
         self.logout()
         self.redirect('/')
+class Signup(Handler):
+    def get(self):
+        self.render("signup.html");
+    def post(self):
+        username=self.request.get("username")
+        password=self.request.get("password")
+        repass=self.request.get('repassword')
+        email=self.request.get("email")
+        if password !=repass:
+            self.render('index.html',pass_message="Password do not match")
+        else:#
+            p=db.user_acc.by_name(username)
+            if p:
+                self.render("index.html",message=error)
+            else: #
+                p=db.user_acc.register(username=username,password=password,email=email)
+                p.put()
+                self.set_secure_cookie('user_id',str(p.key().id()))
+                self.redirect('/start')
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/login',Login),
     ('/logout',Logout),
+    ('/signup',Signup)
 ], debug=True)
